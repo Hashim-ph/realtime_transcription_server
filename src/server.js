@@ -16,12 +16,12 @@ const rooms = {};
 io.on("connection", socket => {
     socket.on("join-room", roomId => {
         console.log(`Socket ${socket.id} joined room ${roomId}`);
-        
+
         socket.join(roomId);
 
         if (!rooms[roomId]) rooms[roomId] = [];
         rooms[roomId].push(socket.id);
-        
+
         console.log(rooms);
 
         socket.emit(
@@ -45,6 +45,7 @@ io.on("connection", socket => {
     });
 });
 
-server.listen(5000, () => {
-    console.log("Signaling server running on 5000");
-});
+const PORT = process.env.PORT || 5000
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on ${PORT}`)
+})
